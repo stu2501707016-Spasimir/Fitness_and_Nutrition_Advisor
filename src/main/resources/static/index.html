@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интелигентна система за фитнес и хранене</title>
+    <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body>
+<div class="app-shell" id="appShell">
+    <aside class="sidebar" id="sidebar" aria-label="Странична навигация">
+        <div class="sidebar-top">
+            <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Скрий или покажи менюто" aria-expanded="true">
+                <span></span><span></span><span></span>
+            </button>
+            <div class="brand" title="Fitness & Nutrition">
+                <div class="brand-mark">FN</div>
+                <div class="brand-copy">
+                    <strong>Fitness & Nutrition</strong>
+                    <span>Ontology Advisor</span>
+                </div>
+            </div>
+        </div>
+
+        <nav class="side-nav" aria-label="Основна навигация">
+            <a href="#profile" class="active" title="Профил"><span class="nav-icon">👤</span><span class="nav-label">Профил</span></a>
+            <a href="#nutrition" title="Хранене"><span class="nav-icon">🥗</span><span class="nav-label">Хранене</span></a>
+            <a href="#training" title="Тренировки"><span class="nav-icon">🏋️</span><span class="nav-label">Тренировки</span></a>
+            <a href="#constraints" title="Ограничения"><span class="nav-icon">🛡️</span><span class="nav-label">Ограничения</span></a>
+            <a href="#results" title="Резултат"><span class="nav-icon">📊</span><span class="nav-label">Резултат</span></a>
+        </nav>
+
+        <div class="ontology-status" id="ontologyStatus">Проверка на онтологията...</div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div class="title-block">
+                <h1>Интелигентна система за препоръка на фитнес програми и хранителни режими</h1>
+            </div>
+            <div class="topbar-actions" aria-label="Демо профили">
+                <button class="secondary-button" type="button" data-demo="ivan">Демо Ivan</button>
+                <button class="secondary-button" type="button" data-demo="maria">Демо Maria</button>
+                <button class="secondary-button" type="button" data-demo="georgi">Демо Georgi</button>
+            </div>
+        </header>
+
+        <section class="dashboard-stack">
+            <form class="panel form-panel" id="recommendationForm">
+                <div class="section-heading" id="profile">
+                    <span>1</span>
+                    <div>
+                        <h2>Потребителски профил</h2>
+                        <p>Системата използва тези данни за BMI, цел, тренировъчен опит и среда.</p>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <label class="field wide">
+                        <span>Име</span>
+                        <input type="text" name="displayName" value="Maria" autocomplete="name" required>
+                    </label>
+                    <label class="field">
+                        <span>Възраст</span>
+                        <input type="number" name="age" min="14" max="90" value="24" required>
+                    </label>
+                    <label class="field">
+                        <span>Ръст (см)</span>
+                        <input type="number" name="heightCm" min="120" max="230" step="0.1" value="168" required>
+                    </label>
+                    <label class="field">
+                        <span>Тегло (кг)</span>
+                        <input type="number" name="weightKg" min="35" max="250" step="0.1" value="60" required>
+                    </label>
+                    <label class="field wide">
+                        <span>Основна цел</span>
+                        <select name="goalIndividual" id="goalSelect" required></select>
+                    </label>
+                    <label class="field wide" id="training">
+                        <span>Тренировъчен опит</span>
+                        <select name="trainingExperienceIndividual" id="experienceSelect" required></select>
+                    </label>
+                    <label class="field wide">
+                        <span>Предпочитана среда</span>
+                        <select name="workoutEnvironmentIndividual" id="environmentSelect" required></select>
+                    </label>
+                    <label class="field">
+                        <span>Тренировки седмично</span>
+                        <input type="number" name="trainingDaysPerWeek" min="2" max="6" value="4" required>
+                    </label>
+                    <label class="field">
+                        <span>Минути на тренировка</span>
+                        <input type="number" name="preferredSessionMinutes" min="20" max="90" value="60" required>
+                    </label>
+                    <label class="field">
+                        <span>Хранения на ден</span>
+                        <input type="number" name="mealsPerDay" min="2" max="6" value="4" required>
+                    </label>
+                </div>
+
+                <div class="section-heading" id="nutrition">
+                    <span>2</span>
+                    <div>
+                        <h2>Хранителни режими</h2>
+                        <p>В една таблица отбележи дали имаш опит с режима и дали го предпочиташ.</p>
+                    </div>
+                </div>
+                <div class="diet-matrix" id="dietMatrix" aria-label="Хранителни режими"></div>
+
+                <div class="section-heading" id="constraints">
+                    <span>3</span>
+                    <div>
+                        <h2>Ограничения и оборудване</h2>
+                        <p>Алергии, непоносимости и налични уреди се използват като филтри.</p>
+                    </div>
+                </div>
+                <div class="checkbox-area split-area">
+                    <div>
+                        <h3>Ограничения / непоносимости</h3>
+                        <div class="check-grid" id="constraintChecks"></div>
+                    </div>
+                    <div>
+                        <h3>Налично оборудване</h3>
+                        <div class="check-grid" id="equipmentChecks"></div>
+                    </div>
+                </div>
+
+                <button class="primary-button" type="submit">Генерирай интелигентна препоръка</button>
+            </form>
+
+            <section class="results-column" id="results">
+                <div class="panel hero-result" id="resultHero">
+                    <p class="eyebrow">Резултат</p>
+                    <h2>Попълни профила и стартирай препоръката</h2>
+                    <p>Тук ще се покажат BMI, inferred класове, хранителен план, рецепти и седмична тренировъчна програма.</p>
+                </div>
+                <div id="resultContent" class="result-content"></div>
+            </section>
+        </section>
+    </main>
+</div>
+
+<script src="/assets/js/app.js" defer></script>
+</body>
+</html>
